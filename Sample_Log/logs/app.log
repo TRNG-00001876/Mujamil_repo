@@ -1,0 +1,5 @@
+2024-04-16 08:34:14.606 [main] INFO  org.example.Main - This is an informational message
+2024-04-16 08:34:14.609 [main] ERROR org.example.Main - This is an error message
+2024-04-16 08:41:47.451 [main] INFO  org.example.Main - This is an informational message
+2024-04-16 08:41:47.454 [main] ERROR org.example.Main - This is an error message
+2024-04-16 08:41:47.454 [main] WARN  org.example.Main - Muzamil is warning
