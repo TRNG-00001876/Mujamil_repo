@@ -1,25 +1,16 @@
 package org.example.model;
 
 public class Resume {
-    private int id;
     private String location;
     private String skillset1;
     private String skillset2;
     private String skillset3;
 
-    public Resume(int id, String location, String skillset1, String skillset2, String skillset3) {
+    public Resume(String location, String skillset1, String skillset2, String skillset3) {
         this.location = location;
         this.skillset1 = skillset1;
         this.skillset2 = skillset2;
         this.skillset3 = skillset3;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getLocation() {

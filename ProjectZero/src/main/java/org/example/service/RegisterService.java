@@ -5,6 +5,8 @@ import org.example.model.Resume;
 import org.example.model.UserRegister;
 import org.example.model.EmployeeRegister;
 
+import java.util.List;
+
 public class RegisterService {
     private UserRegisterDAO userRegisterDAO;
 
@@ -25,7 +27,7 @@ public class RegisterService {
         return userRegisterDAO.validMail(mail);
     }
 
-    public boolean validPassowrd(String password)
+    public boolean validPassword(String password)
     {
         return userRegisterDAO.validPassword(password);
     }
@@ -50,8 +52,24 @@ public class RegisterService {
         userRegisterDAO.validateEmployee(gmail, paaword);
     }
 
-    public void addResume(Resume resume)
+    public void addResume(Resume resume,String gmail)
     {
-        userRegisterDAO.addResume(resume);
+        userRegisterDAO.addResume(resume,gmail);
     }
+
+    public void viewResume(String user_name)
+    {
+       userRegisterDAO.viewResume(user_name);
+    }
+
+    public void updateResume(String location,String skillset1,String skillset2,String skillset3,String user_name)
+    {
+        userRegisterDAO.updateResume(location,skillset1,skillset2,skillset3,user_name);
+    }
+
+    public void deleteResume(String user_name)
+    {
+        userRegisterDAO.deleteResume(user_name);
+    }
+
 }

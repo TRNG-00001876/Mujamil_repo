@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main
 {
@@ -39,10 +41,12 @@ public class Main
                     case 1: boolean exitOne=true;
                             while(exitOne)
                             {
+                                System.out.println("***********************");
                                 System.out.println("Choose operation");
                                 System.out.println("1)User Register");
                                 System.out.println("2)User Login");
                                 System.out.println("3)Go Back ");
+                                System.out.println("***********************");
                                 int choiceOne = scanner.nextInt();
                                 switch (choiceOne)
                                 {
@@ -85,7 +89,7 @@ public class Main
                                             {
                                                 System.out.println("Enter your Password");
                                                 password=scanner.nextLine();
-                                                if(registerService.validPassowrd(password))
+                                                if(registerService.validPassword(password))
                                                 {
                                                     flag2=false;
                                                 }
@@ -111,28 +115,175 @@ public class Main
                                                 boolean exitoneone=true;
                                                 while(exitoneone)
                                                 {
-                                                    System.out.println("1) Create Resume");
-                                                    System.out.println("2) Update Resume");
-                                                    System.out.println("3) Delete Resume");
-                                                    System.out.println("4) View Resume");
-                                                    System.out.println("5) Search job");
-                                                    System.out.println("6) Exit");
+                                                    System.out.println("***********************");
+                                                    System.out.println("1) Resume");
+                                                    System.out.println("2) Search job");
+                                                    System.out.println("3) Exit");
+                                                    System.out.println("***********************");
                                                     int choiceoneone= scanner.nextInt();
                                                     switch (choiceoneone)
                                                     {
-                                                        case 1: System.out.println("Enter the id");
-                                                            int resumeid= scanner.nextInt();
-                                                            scanner.nextLine();
-                                                            System.out.println("Enter your location");
-                                                            String location=scanner.nextLine();
-                                                            System.out.println("Enter your Skillset 1");
-                                                            String skillset1=scanner.nextLine();
-                                                            System.out.println("Enter your Skillset 2");
-                                                            String skillset2=scanner.nextLine();
-                                                            System.out.println("Enter your Skillset 3");
-                                                            String skillset3=scanner.nextLine();
-                                                            Resume resume=new Resume(resumeid,location,skillset1,skillset2,skillset3);
-                                                            registerService.addResume(resume);
+                                                        case 1: boolean flag3=true;
+                                                                while(flag3)
+                                                                {
+                                                                    System.out.println("***********************");
+                                                                    System.out.println("1) Create Resume");
+                                                                    System.out.println("2) View Resume");
+                                                                    System.out.println("3) Update Resume");
+                                                                    System.out.println("4) Delete Resume");
+                                                                    System.out.println("5) Go back");
+                                                                    System.out.println("***********************");
+                                                                    int flag3ch=scanner.nextInt();
+                                                                    scanner.nextLine();
+                                                                    switch (flag3ch)
+                                                                    {
+                                                                        case 1:boolean flag11=true;
+                                                                                String location="";
+                                                                                while(flag11)
+                                                                                {
+                                                                                    System.out.println("Enter your location");
+                                                                                    location=scanner.nextLine();
+                                                                                    if(registerService.validString(location))
+                                                                                    {
+                                                                                        flag11=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input ");
+                                                                                    }
+                                                                                }
+
+                                                                                boolean flag12=true;
+                                                                                String skillset1="";
+                                                                                while(flag12)
+                                                                                {
+                                                                                    System.out.println("Enter your skillset1");
+                                                                                    skillset1=scanner.nextLine();
+                                                                                    if(registerService.validString(skillset1))
+                                                                                    {
+                                                                                        flag12=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input");
+                                                                                    }
+                                                                                }
+
+                                                                                boolean flag13=true;
+                                                                                String skillset2="";
+                                                                                while(flag13)
+                                                                                {
+                                                                                    System.out.println("Enter your skillset2");
+                                                                                    skillset2=scanner.nextLine();
+                                                                                    if(registerService.validString(skillset2))
+                                                                                    {
+                                                                                        flag13=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input");
+                                                                                    }
+                                                                                }
+
+                                                                                boolean flag14=true;
+                                                                                String skillset3="";
+                                                                                while(flag14)
+                                                                                {
+                                                                                    System.out.println("Enter your skillset3");
+                                                                                    skillset3=scanner.nextLine();
+                                                                                    if(registerService.validString(skillset3))
+                                                                                    {
+                                                                                        flag14=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input");
+                                                                                    }
+                                                                                }
+                                                                                Resume resume=new Resume(location,skillset1,skillset2,skillset3);
+                                                                                registerService.addResume(resume,user_name);
+                                                                                break;
+
+                                                                        case 2: registerService.viewResume(user_name);
+                                                                                break;
+
+                                                                        case 3: boolean flag112=true;
+                                                                                String location1="";
+                                                                                while(flag112)
+                                                                                {
+                                                                                    System.out.println("Enter your location");
+                                                                                    location1=scanner.nextLine();
+                                                                                    if(registerService.validString(location1))
+                                                                                    {
+                                                                                        flag112=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input ");
+                                                                                    }
+                                                                                }
+
+                                                                                boolean flag113=true;
+                                                                                String skillset11="";
+                                                                                while(flag113)
+                                                                                {
+                                                                                    System.out.println("Enter your skillset1");
+                                                                                    skillset11=scanner.nextLine();
+                                                                                    if(registerService.validString(skillset11))
+                                                                                    {
+                                                                                        flag113=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input");
+                                                                                    }
+                                                                                }
+
+                                                                                boolean flag131=true;
+                                                                                String skillset21="";
+                                                                                while(flag131)
+                                                                                {
+                                                                                    System.out.println("Enter your skillset2");
+                                                                                    skillset21=scanner.nextLine();
+                                                                                    if(registerService.validString(skillset21))
+                                                                                    {
+                                                                                        flag131=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input");
+                                                                                    }
+                                                                                }
+
+                                                                                boolean flag141=true;
+                                                                                String skillset31="";
+                                                                                while(flag141)
+                                                                                {
+                                                                                    System.out.println("Enter your skillset31");
+                                                                                    skillset31=scanner.nextLine();
+                                                                                    if(registerService.validString(skillset31))
+                                                                                    {
+                                                                                        flag141=false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        System.out.println("Invalid input");
+                                                                                    }
+                                                                                }
+                                                                                registerService.updateResume(location1,skillset11,skillset21,skillset31,user_name);
+                                                                                System.out.println("Sucessfully resume updated");
+                                                                                break;
+
+                                                                        case 4: registerService.deleteResume(user_name);
+                                                                                break;
+
+                                                                        case 5: flag3=false;
+                                                                                break;
+                                                                    }
+                                                                }
+                                                        case 2:
+                                                        case 3: exitoneone=false;
+                                                                break;
                                                     }
                                                 }
                                             }
@@ -149,10 +300,12 @@ public class Main
                     case 2:boolean exitTwo=true;
                             while(exitTwo)
                             {
+                                System.out.println("***********************");
                                 System.out.println("Choose operation");
                                 System.out.println("1)Employee Register");
                                 System.out.println("2)Employee Login");
                                 System.out.println("3)Go Back ");
+                                System.out.println("***********************");
                                 int choiceTwo = scanner.nextInt();
                                 switch (choiceTwo)
                                 {
@@ -195,7 +348,7 @@ public class Main
                                             {
                                                 System.out.println("Enter your Password");
                                                 password=scanner.nextLine();
-                                                if(registerService.validPassowrd(password))
+                                                if(registerService.validPassword(password))
                                                 {
                                                     flag2=false;
                                                 }
@@ -207,6 +360,7 @@ public class Main
 
                                             EmployeeRegister employeeRegister = new EmployeeRegister(companyname,gmail,password);
                                             registerService.addEmpDetails(employeeRegister);
+                                            System.out.println("Register sucessful");
                                             break;
 
                                     case 2: System.out.println("Enter Employee gmail");
@@ -215,6 +369,7 @@ public class Main
                                             System.out.println("Enter password");
                                             String user_password = scanner.nextLine();
                                             registerService.validateEmployee(user_gmail, user_password);
+                                            System.out.println("Login Sucessful");
                                             break;
 
                                     case 3: exitTwo=false;
@@ -227,6 +382,8 @@ public class Main
 
                     case 3:exit=false;
                            break;
+
+                    default:System.out.println("Invalid choice");
                 }
             }
         }

@@ -22,5 +22,12 @@ public interface UserRegisterDAO
 
     void validateEmployee(String gmail,String password);
 
-    void addResume(Resume resume);
+    void addResume(Resume resume,String name);
+
+    void viewResume(String user_name);
+
+    void updateResume(String location,String skillset1,String skillset2,String skillset3,String user_name);
+
+    void deleteResume(String user_name);
+
 }
