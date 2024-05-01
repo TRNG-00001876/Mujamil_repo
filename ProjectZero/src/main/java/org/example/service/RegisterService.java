@@ -15,6 +15,21 @@ public class RegisterService {
         this.userRegisterDAO=userRegisterDAO;
     }
 
+    public boolean validString(String name)
+    {
+        return userRegisterDAO.validString(name);
+    }
+
+    public boolean validMail(String mail)
+    {
+        return userRegisterDAO.validMail(mail);
+    }
+
+    public boolean validPassowrd(String password)
+    {
+        return userRegisterDAO.validPassword(password);
+    }
+
     public void addUserDetails(UserRegister user_reg)
     {
         userRegisterDAO.addUserDetails(user_reg);

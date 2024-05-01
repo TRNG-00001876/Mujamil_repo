@@ -8,6 +8,12 @@ import java.util.List;
 
 public interface UserRegisterDAO
 {
+    boolean validString(String name);
+
+    boolean validMail(String mail);
+
+    boolean validPassword(String password);
+
     void addUserDetails(UserRegister user_reg);
 
     boolean validateUser(String gmail,String password);

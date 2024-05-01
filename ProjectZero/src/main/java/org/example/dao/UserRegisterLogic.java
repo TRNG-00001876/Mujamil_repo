@@ -28,6 +28,36 @@ public class UserRegisterLogic implements UserRegisterDAO
     }
 
     @Override
+    public boolean validString(String name)
+    {
+        if(name==null || name.isEmpty())
+        {
+            return  false;
+        }
+        for(char c:name.toCharArray())
+        {
+            if(! Character.isLetter(c) || c==' ' || c=='/' || c==',' || c=='-')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean validMail(String mail)
+    {
+        String pattern="^[a-zA-Z0-9._%+-]+@gmail.com$";
+        return mail.matches(pattern);
+    }
+
+    public boolean validPassword(String password)
+    {
+        String pattern=".*[!@#$%^&*()\\\\-_=+\\\\\\\\|\\\\[{\\\\]};:'\\\",<.>/?].*\"";
+        return password.matches(pattern);
+    }
+
+    @Override
     public void addUserDetails(UserRegister user_reg)
     {
         try{
