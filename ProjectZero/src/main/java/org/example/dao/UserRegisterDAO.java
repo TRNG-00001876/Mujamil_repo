@@ -20,7 +20,7 @@ public interface UserRegisterDAO
 
     void addEmpDetails(EmployeeRegister employeeRegister);
 
-    void validateEmployee(String gmail,String paaword);
+    void validateEmployee(String gmail,String password);
 
     void addResume(Resume resume);
 }

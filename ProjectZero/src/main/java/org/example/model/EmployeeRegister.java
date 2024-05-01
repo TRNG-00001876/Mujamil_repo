@@ -1,25 +1,16 @@
 package org.example.model;
 
 public class EmployeeRegister {
-    private int id;
     private String companyName;
     private String gmail;
     private String password;
 
-    public EmployeeRegister(int id, String companyName, String gmail, String password) {
-        this.id = id;
+    public EmployeeRegister(String companyName, String gmail, String password) {
         this.companyName = companyName;
         this.gmail = gmail;
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getCompanyName() {
         return companyName;

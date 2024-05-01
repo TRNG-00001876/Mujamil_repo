@@ -46,58 +46,57 @@ public class Main
                                 int choiceOne = scanner.nextInt();
                                 switch (choiceOne)
                                 {
-                                    case 1: System.out.println("Enter ID");
-                                            int id = scanner.nextInt();
-                                            String name;
-                                            scanner.nextLine();
-                                            boolean validName=false;
-                                            do
+                                    case 1: boolean flag=true;
+                                            String name="";
+                                            while(flag)
                                             {
+                                                scanner.nextLine();
                                                 System.out.println("Enter your name");
                                                 name=scanner.nextLine();
                                                 if(registerService.validString(name))
                                                 {
-                                                    validName=true;
+                                                    flag=false;
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("invalid name");
+                                                    System.out.println("Invalid name");
                                                 }
-                                            }while(!validName);
+                                            }
 
-                                            String gmail;
-                                            boolean validMail=false;
-                                            do
+                                            boolean flag1=true;
+                                            String gmail="";
+                                            while(flag1)
                                             {
                                                 System.out.println("Enter your mail");
                                                 gmail=scanner.nextLine();
                                                 if(registerService.validMail(gmail))
                                                 {
-                                                    validMail=true;
+                                                    flag1=false;
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("invalid gmail");
+                                                    System.out.println("Invalid gmail");
                                                 }
-                                            }while(!validMail);
+                                            }
 
-                                            String password;
-                                            boolean validPassword=false;
-                                            do
+                                            boolean flag2=true;
+                                            String password="";
+                                            while(flag2)
                                             {
-                                                System.out.println("Enter your password");
+                                                System.out.println("Enter your Password");
                                                 password=scanner.nextLine();
-                                                if(registerService.validMail(password))
+                                                if(registerService.validPassowrd(password))
                                                 {
-                                                    validPassword=true;
+                                                    flag2=false;
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("password contains at least one special character");
+                                                    System.out.println("Invalid password");
                                                 }
-                                            }while(!validPassword);
+                                            }
 
-                                            UserRegister userRegister = new UserRegister(id, name, gmail, password);
+                                            UserRegister userRegister = new UserRegister(name, gmail, password);
+                                            System.out.println("Register sucessfully");
                                             registerService.addUserDetails(userRegister);
                                             break;
 
@@ -157,59 +156,56 @@ public class Main
                                 int choiceTwo = scanner.nextInt();
                                 switch (choiceTwo)
                                 {
-                                    case 1: System.out.println("Enter ID");
-                                            int id = scanner.nextInt();
-                                            scanner.nextLine();
-                                            String companyname;
-                                            scanner.nextLine();
-                                            boolean validName=false;
-                                            do
+                                    case 1: boolean flag=true;
+                                            String companyname="";
+                                            while(flag)
                                             {
-                                                System.out.println("Enter your name");
+                                                scanner.nextLine();
+                                                System.out.println("Enter your Company name");
                                                 companyname=scanner.nextLine();
                                                 if(registerService.validString(companyname))
                                                 {
-                                                    validName=true;
+                                                    flag=false;
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("invalid name");
+                                                    System.out.println("Invalid name");
                                                 }
-                                            }while(!validName);
+                                            }
 
-                                            String gmail;
-                                            boolean validMail=false;
-                                            do
+                                            boolean flag1=true;
+                                            String gmail="";
+                                            while(flag1)
                                             {
                                                 System.out.println("Enter your mail");
                                                 gmail=scanner.nextLine();
                                                 if(registerService.validMail(gmail))
                                                 {
-                                                    validMail=true;
+                                                    flag1=false;
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("invalid gmail");
+                                                    System.out.println("Invalid gmail");
                                                 }
-                                            }while(!validMail);
+                                            }
 
-                                            String password;
-                                            boolean validPassword=false;
-                                            do
+                                            boolean flag2=true;
+                                            String password="";
+                                            while(flag2)
                                             {
-                                                System.out.println("Enter your password");
+                                                System.out.println("Enter your Password");
                                                 password=scanner.nextLine();
-                                                if(registerService.validMail(password))
+                                                if(registerService.validPassowrd(password))
                                                 {
-                                                    validPassword=true;
+                                                    flag2=false;
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("password contains at least one special character");
+                                                    System.out.println("Invalid password");
                                                 }
-                                            }while(!validPassword);
+                                            }
 
-                                            EmployeeRegister employeeRegister = new EmployeeRegister(id,companyname,gmail,password);
+                                            EmployeeRegister employeeRegister = new EmployeeRegister(companyname,gmail,password);
                                             registerService.addEmpDetails(employeeRegister);
                                             break;
 

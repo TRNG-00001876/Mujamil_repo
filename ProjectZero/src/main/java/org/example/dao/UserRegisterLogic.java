@@ -53,7 +53,7 @@ public class UserRegisterLogic implements UserRegisterDAO
 
     public boolean validPassword(String password)
     {
-        String pattern=".*[!@#$%^&*()\\\\-_=+\\\\\\\\|\\\\[{\\\\]};:'\\\",<.>/?].*\"";
+        String pattern=".*[!@#$%^&*()\\\\-_=+\\\\\\\\|\\\\[{\\\\]};:'\\\",<.>/?].*";
         return password.matches(pattern);
     }
 
@@ -61,11 +61,10 @@ public class UserRegisterLogic implements UserRegisterDAO
     public void addUserDetails(UserRegister user_reg)
     {
         try{
-            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO USER_DATA(id,name,gmail,password) VALUES (?,?,?,?)");
-            preparedStatement.setInt(1,user_reg.getId());
-            preparedStatement.setString(2,user_reg.getName());
-            preparedStatement.setString(3,user_reg.getGmail());
-            preparedStatement.setString(4,user_reg.getPassword());
+            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO USERDATA(name,gmail,password) VALUES (?,?,?)");
+            preparedStatement.setString(1,user_reg.getName());
+            preparedStatement.setString(2,user_reg.getGmail());
+            preparedStatement.setString(3,user_reg.getPassword());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -78,7 +77,7 @@ public class UserRegisterLogic implements UserRegisterDAO
     public boolean validateUser(String gmail,String password)
     {
         try{
-            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * from USER_DATA WHERE gmail=? AND password=? ");
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * from USERDATA WHERE gmail=? AND password=? ");
             preparedStatement.setString(1,gmail);
             preparedStatement.setString(2,password);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -106,11 +105,10 @@ public class UserRegisterLogic implements UserRegisterDAO
     public void addEmpDetails(EmployeeRegister employeeRegister)
     {
         try{
-            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO EMP_DATA(id,company_name,gmail,password) VALUES (?,?,?,?)");
-            preparedStatement.setInt(1,employeeRegister.getId());
-            preparedStatement.setString(2,employeeRegister.getCompanyName());
-            preparedStatement.setString(3,employeeRegister.getGmail());
-            preparedStatement.setString(4,employeeRegister.getPassword());
+            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO EMPDATA(company_name,gmail,password) VALUES (?,?,?)");
+            preparedStatement.setString(1,employeeRegister.getCompanyName());
+            preparedStatement.setString(2,employeeRegister.getGmail());
+            preparedStatement.setString(3,employeeRegister.getPassword());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)

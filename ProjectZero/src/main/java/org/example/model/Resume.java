@@ -8,7 +8,6 @@ public class Resume {
     private String skillset3;
 
     public Resume(int id, String location, String skillset1, String skillset2, String skillset3) {
-        this.id = id;
         this.location = location;
         this.skillset1 = skillset1;
         this.skillset2 = skillset2;
