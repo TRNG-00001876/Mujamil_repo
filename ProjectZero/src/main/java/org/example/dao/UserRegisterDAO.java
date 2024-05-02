@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.model.EmployeeRegister;
+import org.example.model.Job;
 import org.example.model.UserRegister;
 import org.example.model.Resume;
 
@@ -20,7 +21,7 @@ public interface UserRegisterDAO
 
     void addEmpDetails(EmployeeRegister employeeRegister);
 
-    void validateEmployee(String gmail,String password);
+    boolean validateEmployee(String gmail,String password);
 
     void addResume(Resume resume,String name);
 
@@ -29,5 +30,7 @@ public interface UserRegisterDAO
     void updateResume(String location,String skillset1,String skillset2,String skillset3,String user_name);
 
     void deleteResume(String user_name);
+
+    void postJob(Job job,String name);
 
 }

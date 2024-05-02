@@ -1,5 +1,6 @@
 package org.example.dao;
 import org.example.model.EmployeeRegister;
+import org.example.model.Job;
 import org.example.model.UserRegister;
 import org.example.model.Resume;
 
@@ -7,8 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class UserRegisterLogic implements UserRegisterDAO
 {
@@ -103,24 +103,9 @@ public class UserRegisterLogic implements UserRegisterDAO
         return false;
     }
 
-    @Override
-    public void addEmpDetails(EmployeeRegister employeeRegister)
-    {
-        try{
-            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO EMPDATA(company_name,gmail,password) VALUES (?,?,?)");
-            preparedStatement.setString(1,employeeRegister.getCompanyName());
-            preparedStatement.setString(2,employeeRegister.getGmail());
-            preparedStatement.setString(3,employeeRegister.getPassword());
-            preparedStatement.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     @Override
-    public void validateEmployee(String gmail,String password)
+    public boolean validateEmployee(String gmail,String password)
     {
         try{
             PreparedStatement preparedStatement=connection.prepareStatement("SELECT * from EMPDATA WHERE gmail=? AND password=? ");
@@ -133,14 +118,32 @@ public class UserRegisterLogic implements UserRegisterDAO
                 String Cpassword=resultSet.getString("password");
                 if(gmail.equals(Cgmail) && password.equals(Cpassword))
                 {
-                    System.out.println("login Sucessfully");
+                    return true;
                 }
+                return true;
             }
             else{
                 System.out.println("No record is there just register and login ");
             }
         }
         catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public void addEmpDetails(EmployeeRegister employeeRegister)
+    {
+        try{
+            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO EMPDATA(company_name,gmail,password) VALUES (?,?,?)");
+            preparedStatement.setString(1,employeeRegister.getCompanyName());
+            preparedStatement.setString(2,employeeRegister.getGmail());
+            preparedStatement.setString(3,employeeRegister.getPassword());
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
     }
@@ -235,8 +238,12 @@ public class UserRegisterLogic implements UserRegisterDAO
             }
             PreparedStatement preparedStatement = connection.prepareStatement("update empresume set location=? , skillset1=?, skillset2=?, skillset3=? where id=?");
 
-            preparedStatement.setInt(4,id);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.setString(1,location);
+            preparedStatement.setString(2,skillset1);
+            preparedStatement.setString(3,skillset2);
+            preparedStatement.setString(4,skillset3);
+            preparedStatement.setInt(5,id);
+            preparedStatement.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -257,8 +264,35 @@ public class UserRegisterLogic implements UserRegisterDAO
             }
             PreparedStatement preparedStatement = connection.prepareStatement("delete FROM empresume where id=?");
             preparedStatement.setInt(1,id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             System.out.println("Sucessfully Deleted");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void postJob(Job job,String name)
+    {
+        try{
+            int id=0;
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from empdata where gmail=?");
+            preparedStatement.setString(1,name);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if (resultSet.next())
+            {
+                id=resultSet.getInt("id");
+            }
+
+            PreparedStatement preparedStatement1=connection.prepareStatement("INSERT INTO job(id,role,required,experience,lpa) VALUES (?,?,?,?,?)");
+            preparedStatement1.setInt(1,id);
+            preparedStatement1.setString(2,job.getRole());
+            preparedStatement1.setString(3,job.getRequired());
+            preparedStatement1.setString(4,job.getExperience());
+            preparedStatement1.setString(5,job.getLpa());
+            preparedStatement1.executeUpdate();
+            System.out.println("Sucessfully job Post Created");
         }
         catch(SQLException e)
         {

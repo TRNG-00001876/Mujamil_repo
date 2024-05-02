@@ -1,5 +1,6 @@
 package org.example;
 import org.example.model.EmployeeRegister;
+import org.example.model.Job;
 import org.example.model.Resume;
 import org.example.model.UserRegister;
 import org.example.dao.UserRegisterDAO;
@@ -9,8 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Main
 {
@@ -368,8 +368,60 @@ public class Main
                                             String user_gmail = scanner.nextLine();
                                             System.out.println("Enter password");
                                             String user_password = scanner.nextLine();
-                                            registerService.validateEmployee(user_gmail, user_password);
-                                            System.out.println("Login Sucessful");
+                                            if(registerService.validateEmployee(user_gmail, user_password))
+                                            {
+                                                System.out.println("Login Sucessful");
+                                                boolean exit01=true;
+                                                while (exit01)
+                                                {
+                                                    System.out.println("1) job posting");
+                                                    System.out.println("2) View Job ");
+                                                    System.out.println("3) List Of User Applied");
+                                                    System.out.println("3) Go back");
+                                                    int exitchoice=scanner.nextInt();
+                                                    scanner.nextLine();
+                                                    switch (exitchoice)
+                                                    {
+                                                        case 1: boolean last=true;
+                                                                while(last)
+                                                                {
+                                                                    System.out.println("Enter the role");
+                                                                    String role=scanner.nextLine();
+                                                                    System.out.println("Enter the required");
+                                                                    String required=scanner.nextLine();
+                                                                    System.out.println("Enter the experience");
+                                                                    String experience=scanner.nextLine();
+                                                                    System.out.println("Enter the lpa");
+                                                                    String lpa=scanner.nextLine();
+                                                                    Job job=new Job(role,required,experience,lpa);
+                                                                    registerService.postJob(job,user_gmail);
+                                                                }
+
+                                                        case 2: boolean lastone=true;
+                                                                while(lastone)
+                                                                {
+                                                                    System.out.println("1) View Application");
+                                                                    System.out.println("2) Update Application");
+                                                                    System.out.println("3) Delete Application");
+                                                                    System.out.println("4) Go Back");
+                                                                    int option=scanner.nextInt();
+                                                                    switch (option)
+                                                                    {
+                                                                        case 1:
+                                                                        case 2:
+                                                                        case 3:
+                                                                        case 4: lastone=false;
+                                                                                break;
+                                                                    }
+                                                                }
+
+                                                        case 3: exit01=false;
+                                                                break;
+
+                                                        default: System.out.println("Invalid option");
+                                                    }
+                                                }
+                                            }
                                             break;
 
                                     case 3: exitTwo=false;

@@ -1,11 +1,10 @@
 package org.example.service;
 
 import org.example.dao.UserRegisterDAO;
+import org.example.model.Job;
 import org.example.model.Resume;
 import org.example.model.UserRegister;
 import org.example.model.EmployeeRegister;
-
-import java.util.List;
 
 public class RegisterService {
     private UserRegisterDAO userRegisterDAO;
@@ -47,9 +46,9 @@ public class RegisterService {
         userRegisterDAO.addEmpDetails(employeeRegister);
     }
 
-    public void validateEmployee(String gmail,String paaword)
+    public boolean validateEmployee(String gmail,String paaword)
     {
-        userRegisterDAO.validateEmployee(gmail, paaword);
+        return userRegisterDAO.validateEmployee(gmail, paaword);
     }
 
     public void addResume(Resume resume,String gmail)
@@ -70,6 +69,11 @@ public class RegisterService {
     public void deleteResume(String user_name)
     {
         userRegisterDAO.deleteResume(user_name);
+    }
+
+    public void postJob(Job job, String name)
+    {
+        userRegisterDAO.postJob(job,name);
     }
 
 }
