@@ -6,6 +6,9 @@ import org.example.model.UserRegister;
 import org.example.dao.UserRegisterDAO;
 import org.example.dao.UserRegisterLogic;
 import org.example.service.RegisterService;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,6 +17,7 @@ import java.util.Scanner;
 
 public class Main
 {
+    private static final Logger log=LoggerFactory.getLogger(Main.class);
     static
     {
         System.out.println("Welcome To RevHire '.' ");
@@ -21,6 +25,7 @@ public class Main
 
     public static void main(String[] args)
     {
+        log.info("Application start");
         try
         {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=projectzero;integratedSecurity=True;encrypt=True;TrustServerCertificate=True");
@@ -553,6 +558,9 @@ public class Main
                                                                 break;
 
                                                         case 3: registerService.userlist(user_gmail);
+                                                                System.out.println("Enter the status");
+                                                                String status=scanner.nextLine();
+                                                                registerService.accpetOrReject(status,user_gmail);
                                                                 break;
 
                                                         case 4: exit01=false;
@@ -564,7 +572,9 @@ public class Main
                                             }
                                             break;
 
-                                    case 3: exitTwo=false;
+                                    case 3:
+
+                                    case 4: exitTwo=false;
                                             break;
 
                                     default: System.out.println("Invalid choice");
@@ -576,6 +586,7 @@ public class Main
                            break;
 
                     default:System.out.println("Invalid choice");
+                            break;
                 }
             }
         }

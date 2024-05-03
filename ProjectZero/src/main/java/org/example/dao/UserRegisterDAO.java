@@ -55,4 +55,6 @@ public interface UserRegisterDAO
 
     void userlist(String gmail);
 
+    void accpetOrReject(String status,String mail);
+
 }

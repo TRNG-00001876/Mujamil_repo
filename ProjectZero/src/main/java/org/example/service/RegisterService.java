@@ -129,4 +129,9 @@ public class RegisterService {
         userRegisterDAO.userlist(gmail);
     }
 
+    public void accpetOrReject(String status,String mail)
+    {
+        userRegisterDAO.accpetOrReject(status,mail);
+    }
+
 }

@@ -3,6 +3,8 @@ import org.example.model.EmployeeRegister;
 import org.example.model.Job;
 import org.example.model.UserRegister;
 import org.example.model.Resume;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -600,12 +602,46 @@ public class UserRegisterLogic implements UserRegisterDAO
             PreparedStatement preparedStatement2=connection.prepareStatement("select * from userdata where id=?");
             preparedStatement2.setInt(1,eid);
             ResultSet resultSet2=preparedStatement2.executeQuery();
-            if(resultSet2.next())
+            while(resultSet2.next())
             {
                 System.out.println("Gmail :"+resultSet2.getString("gmail"));
             }
         }
         catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void accpetOrReject(String status,String mail)
+    {
+        int ids = 0;
+        try{
+
+            PreparedStatement preparedStatement1=connection.prepareStatement("select id from empdata where gmail=?");
+            preparedStatement1.setString(1,mail);
+            ResultSet resultSet=preparedStatement1.executeQuery();
+            if(resultSet.next())
+            {
+                ids=resultSet.getInt("id");
+                System.out.println(ids);
+            }
+            PreparedStatement preparedStatement=connection.prepareStatement("update application set status=? where emp_id=?");
+            preparedStatement.setString(1,status);
+            preparedStatement.setInt(2,ids);
+          int  a1  = preparedStatement.executeUpdate();
+           if(a1>0)
+           {
+              System.out.println("Updated sucessfully");
+           }
+           else
+           {
+                System.out.println("Not updated");
+           }
+
+        }
+        catch (SQLException e)
         {
             e.printStackTrace();
         }
