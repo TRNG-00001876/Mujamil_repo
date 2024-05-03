@@ -33,4 +33,26 @@ public interface UserRegisterDAO
 
     void postJob(Job job,String name);
 
+    void viewApplication(String mail);
+
+    boolean checkupdateApplication(String role);
+
+    void updateApplication(String gmail,String role,String required,String experience,String lpa);
+
+    void deleteApplication(String gmail);
+
+    void listAllJobs();
+
+    void searchByRole(String role);
+
+    void searchByRequired(String req);
+
+    boolean checkValidForApply(String gmail,String role);
+
+    void applyForJob(String mail,String name);
+
+    void status(String gmail);
+
+    void userlist(String gmail);
+
 }

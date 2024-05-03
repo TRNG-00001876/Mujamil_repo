@@ -225,6 +225,42 @@ public class UserRegisterLogic implements UserRegisterDAO
     }
 
     @Override
+    public void viewApplication(String mail)
+    {
+        try{
+            int id=0;
+            String name="";
+            PreparedStatement preparedStatement1=connection.prepareStatement("select * from empdata where gmail=?");
+            preparedStatement1.setString(1,mail);
+            ResultSet resultSet1=preparedStatement1.executeQuery();
+            if(resultSet1.next())
+            {
+                id=resultSet1.getInt("id");
+                name=resultSet1.getString("company_name");
+            }
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM job where id=?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println("***********************");
+            System.out.println("Application");
+            System.out.println("Name: "+name);
+            System.out.println("gmail: "+mail);
+            while(resultSet.next()) {
+                System.out.println("ID : "+resultSet.getInt("id"));
+                System.out.println("ROLE : "+resultSet.getString("role"));
+                System.out.println("REQUIRED : "+resultSet.getString("required"));
+                System.out.println("EXPERIENCE : "+resultSet.getString("experience"));
+                System.out.println("LPA : "+resultSet.getString("lap"));
+                System.out.println("***********************");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void updateResume(String location,String skillset1,String skillset2,String skillset3,String user_name)
     {
         try{
@@ -251,6 +287,61 @@ public class UserRegisterLogic implements UserRegisterDAO
         }
     }
 
+    @Override
+    public void updateApplication(String oldrole,String role,String required,String experience,String lpa)
+    {
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("update job set role=? , required=?, experience=?, lap=? where role=?");
+            preparedStatement.setString(1,role);
+            preparedStatement.setString(2,required);
+            preparedStatement.setString(3,experience);
+            preparedStatement.setString(4,lpa);
+            preparedStatement.setString(5,oldrole);
+            preparedStatement.executeUpdate();
+            System.out.println("Updated sucessfully");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteApplication(String gmail)
+    {
+       try{
+           PreparedStatement preparedStatement = connection.prepareStatement("delete FROM job where role=?");
+           preparedStatement.setString(1,gmail);
+           preparedStatement.executeUpdate();
+           System.out.println("Sucessfully Deleted");
+       }
+       catch (SQLException e)
+       {
+           e.printStackTrace();
+       }
+    }
+
+    @Override
+    public boolean checkupdateApplication(String role)
+    {
+        try
+        {
+            PreparedStatement preparedStatement= connection.prepareStatement("select * from job where role=?");
+            preparedStatement.setString(1,role);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                return true;
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public void deleteResume(String user_name)
     {
         try{
@@ -273,6 +364,7 @@ public class UserRegisterLogic implements UserRegisterDAO
         }
     }
 
+    @Override
     public void postJob(Job job,String name)
     {
         try{
@@ -285,7 +377,7 @@ public class UserRegisterLogic implements UserRegisterDAO
                 id=resultSet.getInt("id");
             }
 
-            PreparedStatement preparedStatement1=connection.prepareStatement("INSERT INTO job(id,role,required,experience,lpa) VALUES (?,?,?,?,?)");
+            PreparedStatement preparedStatement1=connection.prepareStatement("INSERT INTO job(id,role,required,experience,lap) VALUES (?,?,?,?,?)");
             preparedStatement1.setInt(1,id);
             preparedStatement1.setString(2,job.getRole());
             preparedStatement1.setString(3,job.getRequired());
@@ -300,4 +392,222 @@ public class UserRegisterLogic implements UserRegisterDAO
         }
     }
 
+    @Override
+    public void listAllJobs()
+    {
+        try{
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from job");
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                System.out.println("***********************************************************");
+                System.out.println("Role :"+resultSet.getString("role"));
+                System.out.println("Required :"+resultSet.getString("required"));
+                System.out.println("Experience :"+resultSet.getString("experience"));
+                System.out.println("LPA :"+resultSet.getString("lap"));
+                System.out.println("***********************************************************");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void searchByRole(String role)
+    {
+        try{
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from job where role=?");
+            preparedStatement.setString(1,role);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                System.out.println("***********************************************************");
+                System.out.println("Role :"+resultSet.getString("role"));
+                System.out.println("Required :"+resultSet.getString("required"));
+                System.out.println("Experience :"+resultSet.getString("experience"));
+                System.out.println("LPA :"+resultSet.getString("lap"));
+                System.out.println("***********************************************************");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void searchByRequired(String req)
+    {
+        try{
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from job where required=?");
+            preparedStatement.setString(1,req);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                System.out.println("***********************************************************");
+                System.out.println("Role :"+resultSet.getString("role"));
+                System.out.println("Required :"+resultSet.getString("required"));
+                System.out.println("Experience :"+resultSet.getString("experience"));
+                System.out.println("LPA :"+resultSet.getString("lap"));
+                System.out.println("***********************************************************");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean checkValidForApply(String gmail,String crole)
+    {
+        try{
+            int id=0;
+            int jid=0;
+            String role="";
+            PreparedStatement preparedStatement=connection.prepareStatement("select id from userdata where gmail=?");
+            preparedStatement.setString(1,gmail);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                id=resultSet.getInt("id");
+            }
+
+            PreparedStatement preparedStatement1=connection.prepareStatement("select * from application where emp_id=?");
+            preparedStatement1.setInt(1,id);
+            ResultSet resultSet1=preparedStatement1.executeQuery();
+            if(resultSet1.next())
+            {
+                jid=resultSet1.getInt("job_id");
+            }
+
+            PreparedStatement preparedStatement2=connection.prepareStatement("select * from job where id=?");
+            preparedStatement2.setInt(1,jid);
+            ResultSet resultSet2=preparedStatement2.executeQuery();
+            if(resultSet2.next())
+            {
+                role=resultSet2.getString("role");
+            }
+            if(crole==role)
+            {
+                return true;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void applyForJob(String mail,String name)
+    {
+        try{
+            int id=0;
+            int cid=0;
+            String status="pending";
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from userdata where gmail=?");
+            preparedStatement.setString(1,mail);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                id=resultSet.getInt("id");
+            }
+
+
+            PreparedStatement preparedStatement2=connection.prepareStatement("select * from job where role=?");
+            preparedStatement2.setString(1,name);
+            ResultSet resultSet2=preparedStatement2.executeQuery();
+            if(resultSet2.next())
+            {
+                cid=resultSet2.getInt("id");
+            }
+
+            PreparedStatement preparedStatement1=connection.prepareStatement("insert into application(emp_id,job_id,status) values(?,?,?)");
+            preparedStatement1.setInt(1,id);
+            preparedStatement1.setInt(2,cid);
+            preparedStatement1.setString(3,status);
+            preparedStatement1.executeUpdate();
+            System.out.println("sucessful");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void status(String gmail) {
+        try{
+            int id=0;
+            int jid=0;
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from userdata where gmail=?");
+            preparedStatement.setString(1,gmail);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                id=resultSet.getInt("id");
+                System.out.println("ID : "+id);
+            }
+
+            PreparedStatement preparedStatement1=connection.prepareStatement("select * from application where emp_id=?");
+            preparedStatement1.setInt(1,id);
+            ResultSet resultSet1=preparedStatement1.executeQuery();
+            while(resultSet1.next())
+            {
+                jid=resultSet1.getInt("job_id");
+                System.out.println("Company id "+jid);
+                System.out.println("Status : "+resultSet1.getString("status"));
+            }
+
+            PreparedStatement preparedStatement3=connection.prepareStatement("select * from empdata where id=?");
+            preparedStatement3.setInt(1,jid);
+            ResultSet resultSet2=preparedStatement3.executeQuery();
+            while(resultSet2.next())
+            {
+                System.out.println("Compant name : "+resultSet2.getString("company_name"));
+            }
+        }
+        catch(SQLException e)
+        {
+
+        }
+    }
+
+    @Override
+    public void userlist(String gmail) {
+        try{
+            int id=0;
+            int eid=0;
+            PreparedStatement preparedStatement=connection.prepareStatement("select * from empdata where gmail=?");
+            preparedStatement.setString(1,gmail);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                id=resultSet.getInt("id");
+            }
+            PreparedStatement preparedStatement1=connection.prepareStatement("select * from application where job_id=?");
+            preparedStatement1.setInt(1,id);
+            ResultSet resultSet1=preparedStatement1.executeQuery();
+            if(resultSet1.next())
+            {
+                eid=resultSet1.getInt("emp_id");
+            }
+            System.out.println("User ID "+eid);
+            PreparedStatement preparedStatement2=connection.prepareStatement("select * from userdata where id=?");
+            preparedStatement2.setInt(1,eid);
+            ResultSet resultSet2=preparedStatement2.executeQuery();
+            if(resultSet2.next())
+            {
+                System.out.println("Gmail :"+resultSet2.getString("gmail"));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

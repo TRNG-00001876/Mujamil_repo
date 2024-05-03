@@ -281,7 +281,113 @@ public class Main
                                                                                 break;
                                                                     }
                                                                 }
-                                                        case 2:
+                                                                break;
+
+                                                        case 2: boolean flagg=true;
+                                                                while(flagg)
+                                                                {
+                                                                    System.out.println("***********************");
+                                                                    System.out.println("1) List All jobs");
+                                                                    System.out.println("2) Search By Role");
+                                                                    System.out.println("3) Search By Required");
+                                                                    System.out.println("4) Status");
+                                                                    System.out.println("5) Go back");
+                                                                    System.out.println("***********************");
+                                                                    int flaggch=scanner.nextInt();
+                                                                    scanner.nextLine();
+                                                                    switch (flaggch)
+                                                                    {
+                                                                        case 1: registerService.listAllJobs();
+                                                                                System.out.println("****************");
+                                                                                System.out.println("1) Apply");
+                                                                                System.out.println("2) Go Back");
+                                                                                System.out.println("*****************");
+                                                                                int flaggchh=scanner.nextInt();
+                                                                                scanner.nextLine();
+                                                                                switch (flaggchh)
+                                                                                {
+                                                                                    case 1: System.out.println("Enter the role to apply");
+                                                                                            String applying=scanner.nextLine();
+                                                                                            if(! registerService.checkValidForApply(user_name,applying))
+                                                                                            {
+                                                                                                registerService.applyForJob(user_name,applying);
+                                                                                            }
+                                                                                            else{
+                                                                                                System.out.println("already applied");
+                                                                                            }
+                                                                                            break;
+
+                                                                                    case 2:break;
+
+                                                                                    default: System.out.println("Invalid");
+                                                                                }
+                                                                                break;
+
+                                                                        case 2: System.out.println("search for Role");
+                                                                                String srole=scanner.nextLine();
+                                                                                registerService.searchByRole(srole);
+                                                                                System.out.println("****************");
+                                                                                System.out.println("1) Apply");
+                                                                                System.out.println("2) Go Back");
+                                                                                System.out.println("*****************");
+                                                                                int flaggchhh=scanner.nextInt();
+                                                                                scanner.nextLine();
+                                                                                switch (flaggchhh)
+                                                                                {
+                                                                                    case 1: System.out.println("Enter the role to apply");
+                                                                                            String applying=scanner.nextLine();
+                                                                                            if(! registerService.checkValidForApply(user_name,applying))
+                                                                                            {
+                                                                                                registerService.applyForJob(user_name,applying);
+                                                                                            }
+                                                                                            else{
+                                                                                                System.out.println("already applied");
+                                                                                            }
+                                                                                            break;
+
+                                                                                    case 2:break;
+
+                                                                                    default: System.out.println("Invalid");
+                                                                                }
+                                                                                break;
+
+                                                                        case 3: System.out.println("search for Required");
+                                                                                String sreq=scanner.nextLine();
+                                                                                registerService.searchByRequired(sreq);
+                                                                                System.out.println("****************");
+                                                                                System.out.println("1) Apply");
+                                                                                System.out.println("2) Go Back");
+                                                                                System.out.println("*****************");
+                                                                                int flaggchhh1=scanner.nextInt();
+                                                                                scanner.nextLine();
+                                                                                switch (flaggchhh1)
+                                                                                {
+                                                                                    case 1: System.out.println("Enter the role to apply");
+                                                                                            String applying=scanner.nextLine();
+                                                                                            if(! registerService.checkValidForApply(user_name,applying))
+                                                                                            {
+                                                                                                registerService.applyForJob(user_name,applying);
+                                                                                            }
+                                                                                            else{
+                                                                                            System.out.println("already applied");
+                                                                                            }
+                                                                                            break;
+
+                                                                                    case 2:break;
+
+                                                                                    default: System.out.println("Invalid");
+                                                                                }
+                                                                                break;
+
+                                                                        case 4: registerService.status(user_name);
+                                                                                break;
+
+                                                                        case 5: flagg=false;
+                                                                                break;
+                                                                    }
+                                                                }
+                                                                break;
+
                                                         case 3: exitoneone=false;
                                                                 break;
                                                     }
@@ -377,25 +483,22 @@ public class Main
                                                     System.out.println("1) job posting");
                                                     System.out.println("2) View Job ");
                                                     System.out.println("3) List Of User Applied");
-                                                    System.out.println("3) Go back");
+                                                    System.out.println("4) Go back");
                                                     int exitchoice=scanner.nextInt();
                                                     scanner.nextLine();
                                                     switch (exitchoice)
                                                     {
-                                                        case 1: boolean last=true;
-                                                                while(last)
-                                                                {
-                                                                    System.out.println("Enter the role");
-                                                                    String role=scanner.nextLine();
-                                                                    System.out.println("Enter the required");
-                                                                    String required=scanner.nextLine();
-                                                                    System.out.println("Enter the experience");
-                                                                    String experience=scanner.nextLine();
-                                                                    System.out.println("Enter the lpa");
-                                                                    String lpa=scanner.nextLine();
-                                                                    Job job=new Job(role,required,experience,lpa);
-                                                                    registerService.postJob(job,user_gmail);
-                                                                }
+                                                        case 1: System.out.println("Enter the role");
+                                                                String role=scanner.nextLine();
+                                                                System.out.println("Enter the required");
+                                                                String required=scanner.nextLine();
+                                                                System.out.println("Enter the experience");
+                                                                String experience=scanner.nextLine();
+                                                                System.out.println("Enter the lpa");
+                                                                String lpa=scanner.nextLine();
+                                                                Job job=new Job(role,required,experience,lpa);
+                                                                registerService.postJob(job,user_gmail);
+                                                                break;
 
                                                         case 2: boolean lastone=true;
                                                                 while(lastone)
@@ -405,17 +508,54 @@ public class Main
                                                                     System.out.println("3) Delete Application");
                                                                     System.out.println("4) Go Back");
                                                                     int option=scanner.nextInt();
+                                                                    scanner.nextLine();
                                                                     switch (option)
                                                                     {
-                                                                        case 1:
-                                                                        case 2:
-                                                                        case 3:
+                                                                        case 1: registerService.viewApplication(user_gmail);
+                                                                                break;
+
+                                                                        case 2: System.out.println("Enter Role for updation");
+                                                                                String crole=scanner.nextLine();
+                                                                                if(registerService.checkupdateApplication(crole))
+                                                                                {
+                                                                                    System.out.println(crole+" Updating into...");
+                                                                                    System.out.println("Enter the role");
+                                                                                    String role1=scanner.nextLine();
+                                                                                    System.out.println("Enter the required");
+                                                                                    String required1=scanner.nextLine();
+                                                                                    System.out.println("Enter the experience");
+                                                                                    String experience1=scanner.nextLine();
+                                                                                    System.out.println("Enter the lpa");
+                                                                                    String lpa1=scanner.nextLine();
+                                                                                    registerService.updateApplication(crole,role1,required1,experience1,lpa1);
+                                                                                }
+                                                                                else{
+                                                                                    System.err.println("No such job role");
+                                                                                }
+                                                                                break;
+
+                                                                        case 3: System.out.println("Enter the role of application to delete");
+                                                                                String drole=scanner.nextLine();
+                                                                                if(registerService.checkupdateApplication(drole))
+                                                                                {
+                                                                                    System.out.println(drole+" Deleting ....");
+                                                                                    registerService.deleteApplication(drole);
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    System.err.println("No such job role");
+                                                                                }
+                                                                                break;
                                                                         case 4: lastone=false;
                                                                                 break;
                                                                     }
                                                                 }
+                                                                break;
 
-                                                        case 3: exit01=false;
+                                                        case 3: registerService.userlist(user_gmail);
+                                                                break;
+
+                                                        case 4: exit01=false;
                                                                 break;
 
                                                         default: System.out.println("Invalid option");

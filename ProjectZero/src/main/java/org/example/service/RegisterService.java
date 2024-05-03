@@ -76,4 +76,57 @@ public class RegisterService {
         userRegisterDAO.postJob(job,name);
     }
 
+    public void viewApplication(String mail)
+    {
+        userRegisterDAO.viewApplication(mail);
+    }
+
+    public boolean checkupdateApplication(String role)
+    {
+        return userRegisterDAO.checkupdateApplication(role);
+    }
+
+    public void updateApplication(String gmail,String role,String required,String experience,String lpa)
+    {
+        userRegisterDAO.updateApplication(gmail,role,required,experience,lpa);
+    }
+
+    public void deleteApplication(String gmail)
+    {
+        userRegisterDAO.deleteApplication(gmail);
+    }
+
+    public void listAllJobs()
+    {
+        userRegisterDAO.listAllJobs();
+    }
+
+    public void searchByRole(String role)
+    {
+        userRegisterDAO.searchByRole(role);
+    }
+
+    public void searchByRequired(String req)
+    {
+        userRegisterDAO.searchByRequired(req);
+    }
+
+    public boolean checkValidForApply(String gmail,String crole)
+    {
+        return userRegisterDAO.checkValidForApply(gmail,crole);
+    }
+
+    public void applyForJob(String mail,String name)
+    {
+        userRegisterDAO.applyForJob(mail,name);
+    }
+
+    public void status(String gmail){
+        userRegisterDAO.status(gmail);
+    }
+
+    public void userlist(String gmail){
+        userRegisterDAO.userlist(gmail);
+    }
+
 }
