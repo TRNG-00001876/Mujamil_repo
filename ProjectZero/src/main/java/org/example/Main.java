@@ -107,6 +107,7 @@ public class Main
                                             UserRegister userRegister = new UserRegister(name, gmail, password);
                                             System.out.println("Register sucessfully");
                                             registerService.addUserDetails(userRegister);
+                                            log.info("job seaker registered");
                                             break;
 
                                     case 2: System.out.println("Enter user gmail");
@@ -117,6 +118,7 @@ public class Main
                                             if(registerService.validateUser(user_name, user_password))
                                             {
                                                 System.out.println("Sucessfully Login");
+                                                log.info("Sucessfully Login");
                                                 boolean exitoneone=true;
                                                 while(exitoneone)
                                                 {
@@ -482,6 +484,7 @@ public class Main
                                             if(registerService.validateEmployee(user_gmail, user_password))
                                             {
                                                 System.out.println("Login Sucessful");
+                                                log.info("Employee login");
                                                 boolean exit01=true;
                                                 while (exit01)
                                                 {
@@ -536,6 +539,7 @@ public class Main
                                                                                 }
                                                                                 else{
                                                                                     System.err.println("No such job role");
+                                                                                    log.warn("No such job role");
                                                                                 }
                                                                                 break;
 
@@ -549,6 +553,7 @@ public class Main
                                                                                 else
                                                                                 {
                                                                                     System.err.println("No such job role");
+                                                                                    log.warn("No such job role");
                                                                                 }
                                                                                 break;
                                                                         case 4: lastone=false;
@@ -589,6 +594,7 @@ public class Main
                             break;
                 }
             }
+            log.info("Application End");
         }
 
         catch(SQLException e)
@@ -597,6 +603,8 @@ public class Main
         }
 
         System.out.println("Thanks For Using See You Again '.'");
+
+
 }
 
 

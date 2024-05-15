@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/e30ff80d49.js" crossorigin="anonymous"></script>
+    <style>
+
+        body{
+            margin: 0px;
+        }
+
+        #parentid{
+            height: 97vh;
+            width: 100%;
+        }
+
+        #head{
+            text-indent: 10px;
+            font-size: 30px;
+            line-height: 50px;
+            background-color: rgb(253, 203, 137);
+            height: 10vh;
+            width: 100%;
+        }
+
+        .container{
+            background-color: blanchedalmond;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row;
+            height: 43vh;
+            width: 100%;
+        }
+
+        .container01{
+            background-color: rgb(253, 203, 137);
+            height: 20vh;
+            width: 150px;
+        }
+        #title{
+            display: inline;
+            margin-left: 480px;
+            margin-right: 380px;
+        }
+
+        #bellicon{
+            display: none;
+        }
+        #parentdiv{
+            position: absolute;
+            top: 70px;
+            left: 50px;
+            opacity: 0.9;
+            display: none;
+            background-color: blanchedalmond;
+            height: 400px;
+            width: 240px;
+            /* border: 1px solid black; */
+        }
+        #divmenu{
+            width: 300px;
+            height: 35px;
+            text-align: center;
+            font-size: 30px;
+            background-color: rgb(253, 203, 137);
+        }
+        #item1{
+            display: none;
+            text-align: center;
+            width: 300px;
+            height: 30px;
+            padding-top: 10px;
+        }
+        #item2{
+            text-align: center;
+            width: 300px;
+            height: 30px;
+            padding-top: 10px;
+        }
+        #item3{
+            width: 300px;
+            height: 30px;
+            text-align: center;
+            padding-top: 10px;
+        }
+        #item4{
+            display: none;
+            width: 300px;
+            height: 30px;
+            text-align: center;
+            padding-top: 10px;
+        }
+        #item5{
+            display: none;
+            /* border: 1px solid black; */
+            width: 300px;
+            height: 150px;
+            text-align: center;
+        }
+        #item6{
+            display: none;
+            /* border: 1px solid black; */
+            width: 300px;
+            height: 190px;
+            text-align: center;
+        }
+        .empty{
+            width: 300px;
+            height: 5px;
+        }
+        #myaudio{
+            display: none;
+        }
+        #myaudio1{
+            display: none;
+        }
+        #snooze{
+            /* display: none; */
+            position: absolute;
+            top: 70px;
+            left: 1200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="snooze"><button id="snooze1">snooze</button></div>
+    <audio src="/Audio/alarm.wav" preload="auto" id="myaudio" autoplay="false"></audio>
+    <audio src="/Audio/alarm.wav" preload="auto" id="myaudio1"></audio>
+    <div id="parentdiv">
+        <div id="divmenu">Setting</div>
+
+        <div id="item1"><button value="24" id="formatbutton1" class="format">24 hr format</button></div>
+
+        <div id="item2"><button value="12" id="formatbutton2" class="format">12 hr format</button></div>
+
+        <div class="empty">
+
+        </div>
+
+        <div id="item3"><button id="alarmbutton">alarm 24 hr</button></div>
+
+        <div id="item4"><button id="alarmbutton1">alarm 12 hr</button></div>
+        <div class="empty"> 
+
+        </div>
+        
+        <div id="item5">
+            <span id="hourvalidation"></span>
+            <br>
+            <label for="set1">Hour : </label>
+            <input type="number" id="set1" min="1" max="24">
+            <br>
+            <br>
+            <span id="minutevalidation"></span>
+            <br>
+            <label for="set2">Minutes : </label>
+            <input type="number" id="set2" min="0" max="59">
+            <br>
+            <br>
+            <button id="alarmok" type="reset">ok</button>
+        </div>
+
+        <div id="item6">
+            <span id="hourvalidation1"></span>
+            <br>
+            <label for="set3">Hour : </label>
+            <input type="number" id="set3" min="1" max="12">
+            <br>
+            <br>
+            <span id="minutevalidation1"></span>
+            <br>
+            <label for="set4">Minutes : </label>
+            <input type="number" id="set4" min="0" max="59">
+            <br>
+            <span id="formatvalidation"></span>
+            <br>
+            <label for="set5">Formet</label>
+            <input type="text" id="set5">
+            <br>
+            <br>
+            <button id="alarmok1">ok</button>
+        </div>
+    </div>
+    <div id="parentid">
+        <div id="head" class="phead">
+            <i class="fa-solid fa-bars" id="baricon"></i>
+            <h2 id="title">Digital Clock</h2>
+            <i class="fa-regular fa-bell" id="bellicon"></i>
+        </div>
+
+        <div id="container1" class="container">
+            <div class="container01">
+                Date
+                <h1 id="date">1</h1>
+            </div>
+            <div class="container01">
+                Day
+                <h1 id="day">Sunday</h1>
+            </div>
+            <div class="container01">
+                month
+                <h1 id="month">FEB</h1>
+            </div>
+            <div class="container01">
+                year
+                <h1 id="year">2024</h1>
+            </div>
+        </div>
+        <div id="container2" class="container">
+            <div class="container01">
+                Hour
+                <h1 id="hour">1</h1>
+            </div>
+            <div class="container01">
+                Minutes
+                <h1 id="minutes">1</h1>
+            </div>
+            <div class="container01">
+                Seconds
+                <h1 id="seconds">1</h1>
+            </div>
+            <div class="container01">
+                <h1 id="format">1</h1>
+            </div>
+        </div>
+    </div>
+    <script src="clock.js"></script>
+</body>
+</html>
